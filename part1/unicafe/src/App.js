@@ -1,8 +1,6 @@
 import { useState } from "react";
 
-const Button = ({ text, value, setFunc }) => (
-  <button onClick={() => setFunc(value + 1)}>{text}</button>
-);
+const Button = ({ text, onClick }) => <button onClick={onClick}>{text}</button>;
 
 const StatisticsLine = ({ text, value }) => (
   <tr>
@@ -40,14 +38,16 @@ function App() {
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
 
+  const updateState = (value, setFunc) => () => setFunc(value + 1);
+
   return (
     <div>
       <div>
         <h1>give feedback</h1>
         <div>
-          <Button text="good" value={good} setFunc={setGood} />
-          <Button text="neutral" value={neutral} setFunc={setNeutral} />
-          <Button text="bad" value={bad} setFunc={setBad} />
+          <Button text="good" onClick={updateState(good, setGood)} />
+          <Button text="neutral" onClick={updateState(neutral, setNeutral)} />
+          <Button text="bad" onClick={updateState(bad, setBad)} />
         </div>
       </div>
       <div>
