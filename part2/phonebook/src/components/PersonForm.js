@@ -1,4 +1,5 @@
 import React from 'react'
+import personsService from '../services/persons'
 
 export const PersonForm = ({
   persons,
@@ -17,7 +18,9 @@ export const PersonForm = ({
         name: newName,
         number: newNumber
       }
-      setPersons(persons.concat(newContact))
+      personsService
+        .create(newContact)
+        .then(({ data }) => setPersons(persons.concat(data)))
     } else {
       alert(`${newName} is already add to phonebook`)
     }
