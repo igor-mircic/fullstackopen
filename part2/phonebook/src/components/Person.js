@@ -4,7 +4,6 @@ import personsService from '../services/persons'
 export const Person = ({ person }) => {
   const deletePerson = (id) => () => {
     if (window.confirm(`Delete ${person.name}`)) {
-
       personsService.remove(id)
     }
   }

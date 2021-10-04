@@ -7,7 +7,8 @@ export const PersonForm = ({
   newName,
   setNewName,
   newNumber,
-  setNewNumber
+  setNewNumber,
+  setMessage
 }) => {
   const addContact = (e) => {
     e.preventDefault()
@@ -20,7 +21,13 @@ export const PersonForm = ({
       }
       personsService
         .create(newContact)
-        .then(({ data }) => setPersons(persons.concat(data)))
+        .then(({ data }) => {
+          setMessage(`Added ${data.name}`)
+          setTimeout(() => {
+            setMessage('')
+          }, 5000)
+          return setPersons(persons.concat(data))
+        })
     } else {
       alert(`${newName} is already add to phonebook`)
     }
